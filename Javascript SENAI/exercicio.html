@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <label for="nome1">Digite seu nome: </label>
+        <input type="nome" id="nome1" placeholder="Seu nome">
+        <br><br>
+
+        <label for="user1">Digite seu username: </label>
+        <input type="user" id="user1" placeholder="Seu username">
+        <br><br>
+
+        <p id="changes"></strong></p>
+
+        <button onclick="nomeNovo()">RUN</button>
+
+        <script>
+            function nomeNovo() {
+            event.preventDefault()
+
+            let nome = document.getElementById('nome1').value
+            let user = document.getElementById('user1').value
+            
+            document.getElementById('changes').innerText =`Olá, ${nome.replace(user)}` 
+        }
+        </script>
+       
+    </form>
+</body>
+</html>
