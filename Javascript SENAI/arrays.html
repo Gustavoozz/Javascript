@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Javascript - Arrays:
+        let frutas = ["Goiaba", "Morango", "Abacaxi"]; // Array vazio.
+        console.log(frutas);
+
+        frutas.push("Uva") // Adicionar um item ao array (Same as Add).
+
+        frutas.sort() // Ordenar os elemetos do array (Alphabetic order).
+
+        // For:
+        for (let index = 0; index < frutas.length; index++) {
+        console.log(`Fruta${index + 1}: ${frutas[index]}`)
+        // "Index + 1": Eliminar a opção de listagem "Fruta 0".         
+        }
+
+        
+        // ForEach:
+        frutas.forEach(function (f, i) {
+            console.log(`Frutas${i + 1}: ${f}`);
+        // Listar com números. Semelhante ao "For" acima.
+        });
+
+
+    </script>
+</body>
+</html>
