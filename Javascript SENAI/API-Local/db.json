@@ -1,0 +1,20 @@
+{
+  "imc": [
+    {
+      "id": 1,
+      "nome": "Gustavo",
+      "altura": 1.8,
+      "peso": 62,
+      "situacao": "Normal",
+      "imc": 12.5
+    },
+    {
+      "nome": "Rogério",
+      "altura": 1.97,
+      "peso": 154,
+      "situacao": "Acima do peso",
+      "imc": 34.78,
+      "id": 3
+    }
+  ]
+}
