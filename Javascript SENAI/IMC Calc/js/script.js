@@ -1,66 +1,87 @@
-let usuarios = [];
-
-function calcularImc(peso, altura) {
-	return peso / altura ** 2;
-}
-
-function geraClassificacaoImc(valorImc) {
-    if (valorImc < 18.5) {
-		return "Magreza Severa";
-	} else if (valorImc >= 18.5 && valorImc <= 24.9) {
-		return "Peso normal";
-	} else if (valorImc >= 25 && valorImc <= 29.9) {
-		return "Acima do peso";
-	} else if (valorImc >= 30 && valorImc <= 34.9) {
-		return "Obesidade I";
-	} else if (valorImc >= 35 && valorImc <= 39.9) {
-		return "Obesidade II";
-	} else{
-        return "Obesidade Mórbida";}
-}
+// lista global
+const listaPessoas = []; //lista vazia
 
 function calcular(e) {
-	e.preventDefault();
+  e.preventDefault(); //interrompe/captura o evento disparado
 
-	let nome = document.getElementById("nome").value.trim();
-	let altura = document.getElementById("altura").value;
-	let peso = document.getElementById("peso").value;
+  let nome = document.getElementById("nome").value.trim(); //limpa a string
+  let altura = parseFloat(document.getElementById("altura").value); //NaN
+  let peso = parseFloat(document.getElementById("peso").value);
 
-	let valorImc = calcularImc(peso, altura);
-	let classificacaoImc = geraClassificacaoImc(valorImc);
-	let now = new Date();
-	let dataDeCadastro = `${now.getDate()}/${now.getMonth()}/${now.getFullYear()} - ${now.getHours()}:${now.getMinutes()}`;
+  // verifica se há algum campo sem preencher
+  if (isNaN(altura) || isNaN(peso) || nome.lenght < 2) {
+    alert("É necessário preencher todos os campos");
+    return;
+  }
 
-	if (isNaN(altura) || isNaN(peso) || nome.length < 2) {
-		alert("Preencha corretamente os campos!");
-		return;
-	}
+  const imc = calcularImc(peso, altura);
+  const txtSituacao = geraSituacao(imc);
 
-	let usuario = {
-		nome: nome,
-		altura: altura,
-		peso: peso,
-		valorImc: valorImc,
-		classificacaoImc: classificacaoImc,
-		dataDeCadastro: dataDeCadastro,
-	};
+  const pessoa = {
+    //object short sintaxe
+    nome,
+    altura,
+    peso: peso,
+    imc: imc,
+    situacao: txtSituacao,
+  };
 
-	usuarios.push(usuario);
+  //insere uma pessoa no array
+  listaPessoas.push(pessoa);
 
-	document.getElementById("corpo-tabela").innerHTML += `
-    <tr>
-        <td data-cell="nome">${usuario.nome}</td>
-        <td data-cell="altura">${usuario.altura}</td>
-        <td data-cell="peso">${usuario.peso}</td>
-        <td data-cell="valor do IMC">${usuario.valorImc}</td>
-        <td data-cell="classificação do IMC">${usuario.classificacaoImc}</td>
-        <td data-cell="data de cadastro">${usuario.dataDeCadastro}</td>
-    </tr>
-    `;
+  exibirDados();
+  limparFormulário();
 }
 
-function deletarRegistros() {
-	document.getElementById("corpo-tabela").innerHTML = "";
+function limparFormulário() {
+  document.getElementById("nome").value = "";
+  document.getElementById("altura").value = "";
+  document.getElementById("peso").value = "";
+}
 
-	usuarios = [];
+function calcularImc(peso, altura) {
+  return peso / Math.pow(altura, 2);
+}
+
+/*
+    Resultado	        Situação
+    Menor que 18.5      Magreza Severa
+    Entre 18.5 e 24.99	Peso normal
+    Entre 25 e 29.99	Acima do peso
+    Entre 30 e 34.99	Obesidade I
+    Entre 35 e 39.99	Obesidade II
+    Acima de 40	        Cuidado!!! else
+*/
+function geraSituacao(imc) {
+  if (imc < 18.5) {
+    return "Magreza Severa";
+  } else if (imc < 25) {
+    return "Peso normal";
+  } else if (imc < 30) {
+    return "Acima do peso";
+  } else if (imc < 35) {
+    return "Obesidade I";
+  } else if (imc < 40) {
+    return "Obesidade II";
+  } else {
+    return "Cuidado!!!";
+  }
+}
+
+function exibirDados() {
+  let linhas = "";
+
+  listaPessoas.forEach(function (oPessoa) {
+    linhas += `
+        <tr>
+             <td>${oPessoa.nome}</td>
+            <td>${oPessoa.altura}</td>
+            <td>${oPessoa.peso}</td>
+            <td>${oPessoa.imc.toFixed(2)}</td>
+            <td>${oPessoa.situacao}</td>
+          </tr>
+    `;
+  });
+
+  document.getElementById("cadastro").innerHTML = linhas;
 }
