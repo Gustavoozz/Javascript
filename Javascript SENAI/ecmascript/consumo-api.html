@@ -7,7 +7,15 @@
     <title>Document</title>
 </head>
 <body>
-    <form>
+    <form onsubmit="cadastrar(event)">
+        <label for="endereco">Nome</label>
+        <input type="text" placeholder=" ... " id="nome" />
+        <br /><br />
+
+        <label for="endereco">Telefone</label>
+        <input type="number" placeholder=" ... " id="telefone" />
+        <br /><br />
+
         <label for="cep">CEP</label>
         <input
           type="number"
@@ -18,13 +26,17 @@
         />
         <span id="not-found"></span>
         <br /><br />
-  
+        
         <label for="endereco">Endereço</label>
         <input type="text" placeholder=" ... " id="endereco" />
         <br /><br />
   
         <label for="bairro">Bairro</label>
         <input type="text" placeholder=" ... " id="bairro" />
+        <br /><br />
+
+        <label for="numero">Número</label>
+        <input type="number" placeholder=" ... " id="numero" />
         <br /><br />
   
         <label for="cidade">Cidade</label>
@@ -35,12 +47,49 @@
         <input type="text" placeholder=" ... " id="estado" />
         <br /><br />  
 
+        <button>Salvar contato</button>
       </form>
 
-  
-
-    
     <script>
+        const urlLocal =  "http://localhost:3000/contatos"
+
+        function cadastrar(e) {
+            // Captura o evento de submit do form.
+            e.preventDefault();
+        
+            // Pegar os dados do formulário:
+            const nome = document.getElementById("nome").value
+            const telefone = document.getElementById("telefone").value
+            const endereco = document.getElementById("endereco").value
+            const bairro = document.getElementById("bairro").value
+            const numero = document.getElementById("numero").value
+            const cidade = document.getElementById("cidade").value
+            const estado = document.getElementById("estado").value
+
+            const objDados = {
+                cep,
+                endereco,
+                bairro,
+                cidade,
+                estado
+            };
+
+            try {
+               const promise = fetch(urlLocal, {
+                // Transforma um objeto em JSON.
+                body : JSON.stringify(objDados),
+                headers : {"Content-Type" : "application/json"},
+                method : "post" 
+               }); 
+
+               // Pega o retorno da API.
+               const retorno = promise.json();
+               console.log(retorno)
+
+            } catch (error) {
+                alert("API error" + error)
+            }
+        }
         // Modo atualizado:
         async function chamarApi() {
             const cep = document.getElementById("cep").value

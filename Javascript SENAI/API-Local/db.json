@@ -1,19 +1,27 @@
 {
-  "imc": [
+  "contatos": [
     {
-      "id": 1,
-      "nome": "Gustavo",
-      "altura": 1.8,
-      "peso": 62,
-      "situacao": "Normal",
-      "imc": 12.5
+      "cep": "09405560",
+      "endereco": "",
+      "bairro": "",
+      "cidade": "",
+      "estado": "",
+      "id": 1
     },
     {
-      "nome": "Rogério",
-      "altura": 1.97,
-      "peso": 154,
-      "situacao": "Acima do peso",
-      "imc": 34.78,
+      "cep": "09405560",
+      "endereco": "Rua da Liberdade",
+      "bairro": "Colônia",
+      "cidade": "Ribeirão Pires",
+      "estado": "SP",
+      "id": 2
+    },
+    {
+      "cep": "09405560",
+      "endereco": "Gustavo",
+      "bairro": "",
+      "cidade": "",
+      "estado": "",
       "id": 3
     }
   ]
